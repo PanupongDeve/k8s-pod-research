@@ -1,6 +1,12 @@
 # Check out https://hub.docker.com/_/node to select a new base image
 FROM node:10-slim
 
+USER root
+RUN apt-get update -y && apt-get upgrade -y
+RUN apt-get install -y bash htop curl dnsutils
+RUN apt-get autoremove -y
+
+
 # Set to a non-root built-in user `node`
 USER node
 

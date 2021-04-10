@@ -9,13 +9,16 @@ let respone_timeout = 200;
 
 let respone_error_timeout = 10000;
 
+const hostname = "No HostName" || process.env.HOSTNAME;
+
 
 app.get('/set-timeout/:timeout', (req, res) => {
     const { timeout } = req.params;
     respone_timeout = timeout;
     res.send({
         respone_timeout: `${respone_timeout} ms`,
-        respone_error_timeout: `${respone_error_timeout} ms`
+        respone_error_timeout: `${respone_error_timeout} ms`,
+        hostname
     })
 })
 
@@ -24,7 +27,8 @@ app.get('/set-error-timeout/:timeout', (req, res) => {
     respone_error_timeout = timeout;
     res.send({
         respone_timeout: `${respone_timeout} ms`,
-        respone_error_timeout: `${respone_error_timeout} ms`
+        respone_error_timeout: `${respone_error_timeout} ms`,
+        hostname
     })
 })
 
@@ -34,14 +38,16 @@ app.get('/healthz', (req, res) => {
         setTimeout(() => {
             res.send({
                 respone_timeout: `${respone_timeout} ms`,
-                respone_error_timeout: `${respone_error_timeout} ms`
+                respone_error_timeout: `${respone_error_timeout} ms`,
+                hostname
             })
         }, respone_timeout) 
     } else {
         setTimeout(() => {
             res.status(500).send({
                 respone_timeout: `${respone_timeout} ms`,
-                respone_error_timeout: `${respone_error_timeout} ms`
+                respone_error_timeout: `${respone_error_timeout} ms`,
+                hostname
             })
         }, respone_error_timeout) 
     }
