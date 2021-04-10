@@ -9,7 +9,7 @@ let respone_timeout = 200;
 
 let respone_error_timeout = 10000;
 
-const hostname = "No HostName" || process.env.HOSTNAME;
+const hostname = process.env.HOSTNAME || "No HostName" ;
 
 
 app.get('/set-timeout/:timeout', (req, res) => {
@@ -55,7 +55,7 @@ app.get('/healthz', (req, res) => {
 })
 
 
-const port = 3000 || process.env.PORT
+const port = process.env.PORT || 3000 
 
 app.listen(port, () => {
     console.log(`Server running at port: ${port}`)

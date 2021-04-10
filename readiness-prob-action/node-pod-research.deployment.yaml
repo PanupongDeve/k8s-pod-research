@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: pod-research
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: pod-research
@@ -23,6 +23,14 @@ spec:
           initialDelaySeconds: 0
           failureThreshold: 3
           successThreshold: 1
+          timeoutSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          periodSeconds: 2
+          initialDelaySeconds: 0
+          timeoutSeconds: 300
         image: panupongdeve/node-pods-research:v0.0.1
         ports:
         - containerPort: 3000
