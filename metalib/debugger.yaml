@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: debugger
+  name: debugger
+  # namespace: metallb-system
+spec:
+  containers:
+  - image: panupongdeve/debugger:latest
+    imagePullPolicy: Always
+    name: debugger
