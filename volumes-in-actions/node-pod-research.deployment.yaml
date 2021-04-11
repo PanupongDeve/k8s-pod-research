@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+        app: pod-research-deployment
+  name: pod-research
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pod-research-template
+  template:
+    metadata:
+      labels:
+        app: pod-research-template
+    spec:
+      volumes:
+      - name: "pod-research-volume-1"
+        emptyDir: {}
+      containers:
+      - name: pod-research
+        volumeMounts:
+        - mountPath: "/home/node/app/data"
+          name: "pod-research-volume-1"
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          periodSeconds: 2
+          initialDelaySeconds: 0
+          failureThreshold: 3
+          successThreshold: 1
+          timeoutSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          periodSeconds: 2
+          initialDelaySeconds: 0
+          timeoutSeconds: 300
+        image: panupongdeve/node-pods-research:v0.0.1
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 600m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
