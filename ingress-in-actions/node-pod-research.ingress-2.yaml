@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+      app: pod-research-ingress-2
+  name: pod-research-2
+spec:
+ rules:
+ -  host: pod-research-2.no-info
+    http:
+      paths:
+      - backend:
+          serviceName: pod-research
+          servicePort: 3000
