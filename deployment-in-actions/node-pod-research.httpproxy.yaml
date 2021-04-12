@@ -1,0 +1,30 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: pod-research-proxy
+spec:
+  virtualhost:
+    fqdn: pod-research.no-info
+    rateLimitPolicy:
+      local:
+        requests: 5
+        unit: hour
+    corsPolicy:
+        allowCredentials: true
+        allowOrigin:
+          - "*"
+        allowMethods:
+          - GET
+          - POST
+          - OPTIONS
+  routes:
+    - conditions:
+      - prefix: /
+      pathRewritePolicy:
+          replacePrefix:
+          - prefix: /
+            replacement: /
+      services:
+        - name: pod-research
+          port: 3000
+        
