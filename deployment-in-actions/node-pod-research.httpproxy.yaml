@@ -7,7 +7,7 @@ spec:
     fqdn: pod-research.no-info
     rateLimitPolicy:
       local:
-        requests: 5
+        requests: 100000
         unit: hour
     corsPolicy:
         allowCredentials: true

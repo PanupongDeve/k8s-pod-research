@@ -44,7 +44,7 @@ spec:
           periodSeconds: 2
           initialDelaySeconds: 0
           timeoutSeconds: 300
-        image: panupongdeve/node-pods-research:v0.0.1
+        image: panupongdeve/node-pods-research:v0.0.2
         ports:
         - containerPort: 3000
         resources:
