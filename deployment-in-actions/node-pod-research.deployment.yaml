@@ -14,14 +14,15 @@ spec:
       labels:
         app: pod-research-template
     spec:
-      volumes:
-      - name: "pod-research-volume-1"
-        emptyDir: {}
+      # volumes:
+      # - name: "pod-research-volume-1"
+      #   persistentVolumeClaim:
+      #     claimName: my-claim
       containers:
       - name: pod-research
-        volumeMounts:
-        - mountPath: "/home/node/app/data"
-          name: "pod-research-volume-1"
+        # volumeMounts:
+        # - mountPath: "/home/node/app/data"
+        #   name: "pod-research-volume-1"
         imagePullPolicy: Always
         readinessProbe:
           httpGet:
