@@ -1,0 +1,26 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: pod-research
+spec:
+  hosts:
+  - pod-research
+  - pod-research.greek.com
+  gateways:
+  - pod-research-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /healthz
+    # rewrite: 
+    #   uri: /test
+    route:
+    - destination:
+        host: pod-research
+        subset: v1
+      weight: 100
+
+    - destination:
+        host: pod-research
+        subset: v2
+      weight: 0

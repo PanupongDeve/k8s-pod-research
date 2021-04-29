@@ -1,1 +1,1 @@
-docker run --name node-pod-research -p 3000:3000 -d panupongdeve/node-pods-research:v0.0.1
+docker run --name node-pod-research -p 3000:3000 -d panupongdeve/node-pods-research:v0.0.2
