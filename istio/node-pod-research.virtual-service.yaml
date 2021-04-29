@@ -11,16 +11,27 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /healthz
+        prefix: /
     # rewrite: 
     #   uri: /test
+    headers:
+      request:
+        set:
+          User-Agent: "panupongdeve"
+      response:
+        remove:
+          - server
+          - x-powered-by
+       
     route:
     - destination:
         host: pod-research
         subset: v1
       weight: 100
+      
 
     - destination:
         host: pod-research
         subset: v2
       weight: 0
+    # timeout: 0.5s

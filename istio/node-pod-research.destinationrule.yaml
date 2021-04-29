@@ -8,6 +8,12 @@ spec:
   - name: v1
     labels:
       version: v1
+    trafficPolicy:
+      loadBalancer:
+        simple: LEAST_CONN
+      connectionPool:
+        http:
+          idleTimeout: 30ms
   - name: v2
     labels:
       version: v2
